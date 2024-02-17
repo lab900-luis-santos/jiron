@@ -1,0 +1,37 @@
+package templates
+
+templ index(title string) {
+	<html>
+		<head>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.10/htmx.min.js" integrity="sha512-9qpauSP4+dDIldsrdNEZ2Z7JoyLZGfJsAP2wfXnc3drOh+5NXOBxjlq3sGXKdulmN9W+iwLxRt42zKMa8AHEeg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<title>{ title }</title>
+		</head>
+		<body>
+			<h1>Hello, world!</h1>
+			{ children... }
+		</body>
+	</html>
+}
+
+type Issue struct {
+	Key     string
+	Summary string
+}
+
+templ IssueRender(issue Issue) {
+	<div>
+		<h2>{ issue.Key }</h2>
+		<p>{ issue.Summary }</p>
+	</div>
+}
+
+templ issues(issues []Issue) {
+	@index("Issues") {
+		<h2>Issues</h2>
+		<div>
+			for _, issue := range issues {
+				@IssueRender(issue)
+			}
+		</div>
+	}
+}

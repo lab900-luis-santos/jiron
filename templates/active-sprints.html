@@ -1,0 +1,10 @@
+<ul class="border border-gray-300 rounded p-4">
+    {{range .Sprints}}
+    <!-- Add your past sprints here -->
+    <li class="flex items-center justify-between py-2">
+        <span>{{.Name}}</span>
+        <button class="btn-close" hx-post="/sync/issues?sprint={{.ID}}" hx-swap="none">⟳</button>
+        <button class="text-blue-500" hx-get="/sprint/{{.ULID}}" hx-target="#list">Go</button>
+    </li>
+    {{end}}
+</ul>

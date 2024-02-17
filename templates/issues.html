@@ -1,0 +1,9 @@
+<h1 class="text-2xl font-bold">{{.PageTitle}}</h1>
+<div class="mt-4">
+    {{range .Issues}}
+        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+            <div class="text-lg"><span class="font-semibold">{{.Key}}</span> - {{.Summary}}</div>
+            <p class="text-gray-600">{{.StoryPoints}}</p>
+        </div>
+    {{end}}
+</div>

@@ -1,0 +1,21 @@
+<div class="flex justify-center">
+    <canvas id="sps" class=""></canvas>
+</div>
+<script defer>
+    const ctx = document.getElementById('sps');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ .Labels }},
+            datasets: {{ .Datasets }}
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

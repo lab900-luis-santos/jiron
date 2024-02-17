@@ -1,0 +1,9 @@
+<ul class="border border-gray-300 rounded p-4">
+    {{range .Sprints}}
+    <!-- Add your past sprints here -->
+    <li class="flex items-center justify-between py-2">
+        <span>{{.Name}}</span>
+        <button class="text-gray-500" disabled>Edit</button>
+    </li>
+    {{end}}
+</ul>

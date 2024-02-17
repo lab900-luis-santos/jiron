@@ -1,0 +1,28 @@
+<!-- Path: templates/create-sprint.html -->
+<!-- with tailwind css create a form to create a sprint -->
+<section class="modal">
+    <div class="flex">
+        <button class="btn-close" onclick="closeModal()">⨉</button>
+    </div>
+    <form action="/sprint/{{.ID}}/create" method="POST" class="flex flex-col gap-2">
+        <input type="text" name="id" hidden value="{{.ID}}">
+        <label for="state">State</label>
+        <select name="state" id="state">
+            <option value="active">Active</option>
+            <option value="inactive" >Inactive</option>
+            <option value="future">Future</option>
+        </select>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Sprint Name" value="{{.Name}}">
+        <label for="start">Start Date</label>
+        <input type="datetime-local" name="start" id="start" value="{{.StartDate}}">
+        <label for="end">End Date</label>
+        <input type="datetime-local" name="end" id="end" value="{{.EndDate}}">
+        <button type="submit"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Create
+        </button>
+    </form>
+</section>
+<div class="overlay"></div>
+

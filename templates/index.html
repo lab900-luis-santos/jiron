@@ -1,0 +1,31 @@
+{{ define "index"}}
+<html lang="en">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.10/htmx.min.js"
+        integrity="sha512-9qpauSP4+dDIldsrdNEZ2Z7JoyLZGfJsAP2wfXnc3drOh+5NXOBxjlq3sGXKdulmN9W+iwLxRt42zKMa8AHEeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/modal.js"></script>
+    <link rel="stylesheet" href="/static/modal.css">
+
+    <title>Jiron</title>
+</head>
+
+<body>
+    <!-- create a sync icon in the top right -->
+    <div class="flex justify-end pt-10 pr-10">
+        <button class="btn-close" hx-post="/sync/sprints" hx-swap="none">⟳</button>
+    </div>
+    <div class="flex justify-center gap-2 container pt-20" id="list">
+        {{ template "sprint-list" .}}
+    </div>
+
+    <div class="flex justify-center gap-2" id="modal-container">
+    </div>
+
+</body>
+
+</html>
+{{end}}

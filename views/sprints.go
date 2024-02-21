@@ -80,31 +80,30 @@ func SprintCRUD(w http.ResponseWriter, r *http.Request) {
 		// get status query param
 		status := r.URL.Query().Get("status")
 
-		if status == "active" || status == "future" {
-			service, err := db.NewSprints()
-			if err != nil {
-				log.Println(err)
-			}
-			defer service.Close()
-			dbSprints, _ := service.List([]string{status})
-			sprints := make([]Sprint, 0, len(dbSprints))
-			for _, s := range dbSprints {
-				sprints = append(sprints, Sprint{ULID: s.ULID, ID: int(s.ID), Name: s.Name})
-			}
-
-			tmpl, _ := template.ParseFiles(fmt.Sprintf("templates/%s-sprints.html", status))
-			data := PageData{
-				Sprints: sprints,
-			}
-
-			//cache 60s no revalidate
-			w.Header().Set("Cache-Control", "public, max-age=60, immutable")
-
-			//return type html
-			w.Header().Set("Content-Type", "text/html")
-
-			tmpl.Execute(w, data)
+		service, err := db.NewSprints()
+		if err != nil {
+			log.Println(err)
 		}
+		defer service.Close()
+		dbSprints, _ := service.List([]string{status})
+		sprints := make([]Sprint, 0, len(dbSprints))
+		for _, s := range dbSprints {
+			sprints = append(sprints, Sprint{ULID: s.ULID, ID: int(s.ID), Name: s.Name})
+		}
+
+		tmpl, _ := template.ParseFiles(fmt.Sprintf("templates/%s-sprints.html", status))
+		data := PageData{
+			Sprints: sprints,
+		}
+
+		//cache 60s no revalidate
+		w.Header().Set("Cache-Control", "public, max-age=60, immutable")
+
+		//return type html
+		w.Header().Set("Content-Type", "text/html")
+
+		tmpl.Execute(w, data)
+
 	} else if r.Method == "POST" {
 		log.Println("POST NOT IMPLEMENTED")
 	}

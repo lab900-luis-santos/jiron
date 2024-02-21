@@ -13,7 +13,7 @@ func Sprints() error {
 		log.Println(dbErr)
 		return dbErr
 	}
-	jiraSprints, err := client.GetSprintsInBoard(2, []string{"active", "future"})
+	jiraSprints, err := client.GetSprintsInBoard(2, []string{"closed", "active", "future"})
 	if err != nil {
 		log.Println(err)
 		return err
